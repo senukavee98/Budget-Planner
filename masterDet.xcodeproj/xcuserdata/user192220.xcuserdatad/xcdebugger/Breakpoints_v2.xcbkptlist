@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "891DAB88-6A55-4076-A848-7C10E3A86B30"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E2E6E3E3-216B-45C8-BF4D-547920C00C34"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "masterDet/CustomCell/ExpenceCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "ExpenceCell"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "E2E6E3E3-216B-45C8-BF4D-547920C00C34 - d5acf28cd9b38eaf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "masterDet.ExpenceCell.labelDueDate.getter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "masterDet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user192220/Documents/Projects/ExpPlan/masterDet/CustomCell/ExpenceCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "E2E6E3E3-216B-45C8-BF4D-547920C00C34 - 8f6ba225830bf0b3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "masterDet.ExpenceCell.labelDueDate.setter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "masterDet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user192220/Documents/Projects/ExpPlan/masterDet/CustomCell/ExpenceCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "155">
+               </Location>
+               <Location
+                  uuid = "E2E6E3E3-216B-45C8-BF4D-547920C00C34 - a7ab18b6aea86a3c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "masterDet.ExpenceCell.labelDueDate.modify : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "masterDet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user192220/Documents/Projects/ExpPlan/masterDet/CustomCell/ExpenceCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "59">
+               </Location>
+               <Location
+                  uuid = "E2E6E3E3-216B-45C8-BF4D-547920C00C34 - 840744158c4a47d9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "masterDet.ExpenceCell.labelDueDate.modify : Swift.Optional&lt;__C.UILabel&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "masterDet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user192220/Documents/Projects/ExpPlan/masterDet/CustomCell/ExpenceCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "E2E6E3E3-216B-45C8-BF4D-547920C00C34 - 7c477cb4f9011c55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "masterDet.ExpenceCell.init(style: __C.UITableViewCellStyle, reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; masterDet.ExpenceCell"
+                  moduleName = "masterDet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user192220/Documents/Projects/ExpPlan/masterDet/CustomCell/ExpenceCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "600">
+               </Location>
+               <Location
+                  uuid = "E2E6E3E3-216B-45C8-BF4D-547920C00C34 - 3249690a250185b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "masterDet.ExpenceCell.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;masterDet.ExpenceCell&gt;"
+                  moduleName = "masterDet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user192220/Documents/Projects/ExpPlan/masterDet/CustomCell/ExpenceCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "541">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
