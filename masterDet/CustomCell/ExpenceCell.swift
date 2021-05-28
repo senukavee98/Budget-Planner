@@ -2,7 +2,7 @@
 //  ExpenceCell.swift
 //  masterDet
 //
- //  Created by user192220 on 5/17/21.
+ //  Created by user192220 on 5/17/23.
 //
 
 import UIKit
@@ -14,6 +14,8 @@ class ExpenceCell: UITableViewCell {
 //    @IBOutlet weak var labelNotes: UILabel!
 //    @IBOutlet weak var labelDueDate: UILabel!
     
+    let progressView = CustomProgressView(progressViewStyle: .bar)
+    
     @IBOutlet weak var labelExpenceName: UILabel!
     
     @IBOutlet weak var labelExpenceAmount: UILabel!
@@ -23,6 +25,10 @@ class ExpenceCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+//        progressBar.progress = 0.2
+        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 5)
+        progressBar.tintColor = .black
+        
         // Initialization code
     }
 
@@ -31,5 +37,10 @@ class ExpenceCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func handleProgressValue(value: Double) {
+        if labelExpenceName.text != nil {
+            progressBar.progress = 0.2
+    }
+}
 }

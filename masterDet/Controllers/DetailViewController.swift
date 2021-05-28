@@ -8,20 +8,31 @@
 import UIKit
 import CoreData
 
+struct expenceData {
+    let name: String
+    let amount: Double
+}
+
 class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var labelTotalBudgetValue: UILabel!
+    @IBOutlet weak var labelremainingAmount: UILabel!
+    @IBOutlet weak var labelSpentAmount: UILabel!
+    @IBOutlet weak var labelCategoryName: UILabel!
+    @IBOutlet weak var labelNotes: UILabel!
     
+    var expenceModel = Expence()
+    let pieChart = PieChartView()
     var categoryDetailVC = CatogoryDetailViewController()
-    var remaining_amount = 0.0
-    var total_expence_value = 0.0 {
-        didSet {
-            categoryDetailVC.categoryDetailValueChange(spentValue: total_expence_value, reminingValue: remaining_amount)
-            categoryDetailVC.expence_data = self.expence_data
-            print(expence_data, "ExpenceDATA/////////////////")
+    var total_expence_value = 0.0
+    {
+        didSet{
+            labelSpentAmount.text = "\(total_expence_value)"
+            labelremainingAmount.text = "\(budget!.amount - total_expence_value)"
         }
     }
-    
+    	
     
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -42,8 +53,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     let expenceObj : NSMutableDictionary = NSMutableDictionary()
-    var expence_data:NSMutableArray = []
+    var jsonData = NSData()
+    var expenceDataArray: NSMutableArray = []
 
+    let color = ColorConverter()
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenceCell", for: indexPath) as! ExpenceCell
         
@@ -62,16 +76,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
             let amount = self.fetchedResultsController.fetchedObjects?[indexPath.row].expence_amount
             cell.labelExpenceAmount.text = String(amount!)
-            total_expence_value =  total_expence_value + amount!
-            remaining_amount = amount! - total_expence_value
             
-//            expenceObj.setValue(title, forKey: "name")
-//            expenceObj.setValue(amount, forKey: "amount")
-//            self.expence_data.adding(expenceObj)
-//            defaults.setValue(total_expence_value, forKey: "spent_amount")
-//            categoryDetailVC.labelSpent!.text = String(total_expence_value)
-//            categoryDetailVC.labelSpent!.text = String(self.total_expence_value)
-//            print(total_expence_value, expenceObj, "<<<<<<<<<<<<<<<<<<<<<<<<total_expence_value>>>>>>>>>>>>>>>>>>>>>>>>")
+            total_expence_value =  total_expence_value + amount!
+
+                //Progress Bar
+            cell.progressBar.progress = Float(amount!/budget!.amount)
+            
+            if let progressColor = budget?.boarderColor {
+                cell.progressBar.tintColor = color.hexStringToUIColor(hex: progressColor)
+            }
+            
+
             
         }
         
@@ -88,6 +103,37 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let padding: CGFloat = 20
+
+        pieChart.frame = CGRect(
+            x: 0, y: padding, width: view.frame.size.width, height: 325
+            
+        )
+        
+        if let name = budget?.category_name {
+            labelCategoryName.text = name
+        }
+        if let amount = budget?.amount {
+            labelTotalBudgetValue.text = "\(amount)"
+        }
+        if let notes = budget?.notes {
+            labelNotes.text = "NOTE: " + notes
+        }
+        
+        
+        pieChart.segments = [
+            LabelledSegment(color: .red, name: "Red",        value: 57.56),
+            LabelledSegment(color: #colorLiteral(red: 1.0, green: 0.541176471, blue: 0.0, alpha: 1.0), name: "Orange",     value: 30),
+            LabelledSegment(color: #colorLiteral(red: 0.478431373, green: 0.423529412, blue: 1.0, alpha: 1.0), name: "Purple",     value: 27),
+            LabelledSegment(color: #colorLiteral(red: 0.0, green: 0.870588235, blue: 1.0, alpha: 1.0), name: "Light Blue", value: 40),
+
+        ]
+        
+        pieChart.segmentLabelFont = .systemFont(ofSize: 15)
+        
+        view.addSubview(pieChart)
+        
 //        categoryDetailVC.spentAmount = 20.1
         // Do any additional setup after loading the view.
 //        self.tableView.register(ExpenceCell.self, forCellReuseIdentifier: "expenceCell")
@@ -119,7 +165,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let predicate = NSPredicate(format: "budgetCatoegory = %@", self.budget!)
         fetchRequest.predicate = predicate
         
-        //intantiate the results controller
+        //intantiate the results controller""
         let aFetchedResultsController = NSFetchedResultsController<Expence> (
             fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: #keyPath(Expence.expence_name), cacheName: nil
         )
@@ -153,7 +199,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 cell.detailTextLabel!.text = ""
             }
-            print(cell, "-------------------CONFIGURE CELL IF OUT------------------")
         }
     }
     
@@ -198,7 +243,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             do {
                 try context.save()
-                print(context, "---------------------------CONTEXT -------------------")
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")

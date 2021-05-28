@@ -8,7 +8,6 @@
 import UIKit
 
 class CatogoryDetailViewController: UIViewController {
-
     
     let pieChart = PieChartView()
     
@@ -21,32 +20,40 @@ class CatogoryDetailViewController: UIViewController {
     var categoryName = "Category"
     var totalBudget = 0.0
     var remainingAmount = 0.0
-    var spentAmount = 0.0
+    var spentAmount = 1.0
     var note = "NOTES"
-    var expence_data:NSMutableArray = []
+    var expence_data_array: NSMutableArray = []
     var budget: Budget?
-    var defaults = UserDefaults.standard
+    var expName: String? {
+        didSet {
+            print("Value changed!!!!!")
+        }
+    }
+    var expValue: Double?
+    var expences:Expence?
     
-//    init(spentAmount: Double, remainingAmount: Double, dataArray: NSMutableArray) {
-//        super.init()
-//        self.spentAmount = spentAmount
-//        self.remainingAmount = remainingAmount
-//        self.expence_data = dataArray
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    init(name: String, amount: Double) {
+        self.expName = name
+        self.expValue = amount
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+ 
         labelCategoryName.text = categoryName.uppercased()
         labelTotalBudget.text = String(totalBudget)
         labelNotes.text = "NOTE: " + note
         labelRemaining.text = String(remainingAmount)
-        labelSpent.text = String(spentAmount)
-        
+
         let padding: CGFloat = 20
         let height = (view.frame.height - padding * 3) / 2
         
@@ -79,9 +86,12 @@ class CatogoryDetailViewController: UIViewController {
     }
     
     func categoryDetailValueChange(spentValue: Double, reminingValue: Double) {
-        print(expence_data, "*******************OUT*********************")
         self.spentAmount = spentValue
         self.remainingAmount = reminingValue
+//
+//        for key in expence_data {
+//            print(key[0])
+//        }
 //
 //        if self.categoryName != "" {
 //            spentAmount = spentValue
@@ -91,6 +101,7 @@ class CatogoryDetailViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print(self.expence_data_array, "/////////////////////////////////////////")
 //        labelSpent.text = defaults.object(forKey: "spent_amount") as? String
             }
 

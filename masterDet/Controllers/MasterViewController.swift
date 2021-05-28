@@ -32,7 +32,28 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
-
+    
+    var isSorted = false
+    @IBAction func handleCategorySort(_ sender: UIBarButtonItem) {
+        isSorted = !isSorted
+        
+        let fetchRequest: NSFetchRequest<Budget> = Budget.fetchRequest()
+        
+        // Configure Fetch Request
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "category_name", ascending: isSorted)]
+        
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        aFetchedResultsController.delegate = self
+        _fetchedResultsController = aFetchedResultsController
+        
+        do{
+            try fetchedResultsController.performFetch()
+            tableView.reloadData()
+        } catch {
+            
+        }
+    }
+    
     @objc
     func insertNewObject(_ sender: Any) {
         let context = self.fetchedResultsController.managedObjectContext
@@ -67,6 +88,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 detailViewController = controller
             }
         }
+        if segue.identifier == "editCategory" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let object = fetchedResultsController.object(at: indexPath)
+                let controller = (segue.destination as! UINavigationController).topViewController as! AddCategoryViewController
+                controller.editingCategory = object as Budget
+            }
+        }
+
     }
 
     // MARK: - Table View
@@ -84,7 +113,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
         let budget = fetchedResultsController.object(at: indexPath)
 
-        let cellColor = ColorConverter().hexStringToUIColor(hex: budget.color!)
+        let cellColor = ColorConverter().hexStringToUIColor(hex: budget.color ?? "FFFFFF")
         
         cell.backgroundColor = cellColor
         cell.layer.borderColor = cellColor.cgColor
@@ -132,7 +161,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "category_name", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "category_name", ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         

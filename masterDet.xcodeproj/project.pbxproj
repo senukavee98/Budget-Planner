@@ -15,6 +15,14 @@
 		575A2F9B23FC354100E47A7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575A2F9923FC354100E47A7E /* Main.storyboard */; };
 		575A2F9D23FC354300E47A7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575A2F9C23FC354300E47A7E /* Assets.xcassets */; };
 		575A2FA023FC354300E47A7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575A2F9E23FC354300E47A7E /* LaunchScreen.storyboard */; };
+		FB1BC852265FF02C006EF1D6 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BC851265FF02C006EF1D6 /* Reminder.swift */; };
+		FB1BC85926602981006EF1D6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BC85826602981006EF1D6 /* Notification.swift */; };
+		FB2A2C612660A8EC00DCB56E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A2C602660A8EC00DCB56E /* Extension.swift */; };
+		FB3BA71E265FBB2C002A0B28 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3BA71D265FBB2C002A0B28 /* CustomProgressView.swift */; };
+		FB4198E426605897002D9537 /* Budget+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4198E026605897002D9537 /* Budget+CoreDataClass.swift */; };
+		FB4198E526605897002D9537 /* Budget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4198E126605897002D9537 /* Budget+CoreDataProperties.swift */; };
+		FB4198E626605897002D9537 /* Expence+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4198E226605897002D9537 /* Expence+CoreDataClass.swift */; };
+		FB4198E726605897002D9537 /* Expence+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4198E326605897002D9537 /* Expence+CoreDataProperties.swift */; };
 		FB657AB2265E25FB004A42FC /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB657AB1265E25FB004A42FC /* AddCategoryViewController.swift */; };
 		FB9F98C0265E8BF000933B18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F98BF265E8BF000933B18 /* ViewController.swift */; };
 		FB9F98C3265E8ED500933B18 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F98C2265E8ED500933B18 /* Colours.swift */; };
@@ -38,6 +46,14 @@
 		575A2F9C23FC354300E47A7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		575A2F9F23FC354300E47A7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		575A2FA123FC354300E47A7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB1BC851265FF02C006EF1D6 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		FB1BC85826602981006EF1D6 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		FB2A2C602660A8EC00DCB56E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		FB3BA71D265FBB2C002A0B28 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		FB4198E026605897002D9537 /* Budget+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FB4198E126605897002D9537 /* Budget+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FB4198E226605897002D9537 /* Expence+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Expence+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FB4198E326605897002D9537 /* Expence+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Expence+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FB657AB1265E25FB004A42FC /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		FB9F98BF265E8BF000933B18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FB9F98C2265E8ED500933B18 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
@@ -80,11 +96,12 @@
 		575A2F8D23FC354100E47A7E /* masterDet */ = {
 			isa = PBXGroup;
 			children = (
+				FB1BC854265FFC55006EF1D6 /* Model */,
+				FB657AB4265E2E8E004A42FC /* View */,
+				FB657AAE265E1FD0004A42FC /* Controllers */,
 				FBE441F8265EAEBA0071F190 /* CustomCell */,
 				FBA4EF8B265E6C6000035048 /* Common */,
 				FBC8DB94265E47C50014DE11 /* Coregraphics */,
-				FB657AB4265E2E8E004A42FC /* View */,
-				FB657AAE265E1FD0004A42FC /* Controllers */,
 				575A2F8E23FC354100E47A7E /* AppDelegate.swift */,
 				575A2F9323FC354100E47A7E /* SceneDelegate.swift */,
 				575A2F9C23FC354300E47A7E /* Assets.xcassets */,
@@ -93,6 +110,17 @@
 				FB9F98BF265E8BF000933B18 /* ViewController.swift */,
 			);
 			path = masterDet;
+			sourceTree = "<group>";
+		};
+		FB1BC854265FFC55006EF1D6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB4198E026605897002D9537 /* Budget+CoreDataClass.swift */,
+				FB4198E126605897002D9537 /* Budget+CoreDataProperties.swift */,
+				FB4198E226605897002D9537 /* Expence+CoreDataClass.swift */,
+				FB4198E326605897002D9537 /* Expence+CoreDataProperties.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FB657AAE265E1FD0004A42FC /* Controllers */ = {
@@ -122,6 +150,10 @@
 				FBA4EF8C265E6C9600035048 /* EventHelper.swift */,
 				FBA4EF90265E6CBA00035048 /* ColorConverter.swift */,
 				FB9F98C2265E8ED500933B18 /* Colours.swift */,
+				FB3BA71D265FBB2C002A0B28 /* CustomProgressView.swift */,
+				FB1BC851265FF02C006EF1D6 /* Reminder.swift */,
+				FB1BC85826602981006EF1D6 /* Notification.swift */,
+				FB2A2C602660A8EC00DCB56E /* Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -214,20 +246,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB2A2C612660A8EC00DCB56E /* Extension.swift in Sources */,
+				FB4198E526605897002D9537 /* Budget+CoreDataProperties.swift in Sources */,
+				FB1BC852265FF02C006EF1D6 /* Reminder.swift in Sources */,
+				FB4198E726605897002D9537 /* Expence+CoreDataProperties.swift in Sources */,
 				FBA4EF91265E6CBA00035048 /* ColorConverter.swift in Sources */,
 				FB9F98C3265E8ED500933B18 /* Colours.swift in Sources */,
 				FBC8DB96265E48090014DE11 /* PieChartView.swift in Sources */,
 				575A2F9623FC354100E47A7E /* MasterViewController.swift in Sources */,
+				FB4198E626605897002D9537 /* Expence+CoreDataClass.swift in Sources */,
 				FB9F98C0265E8BF000933B18 /* ViewController.swift in Sources */,
 				FBE441FA265EAEF40071F190 /* ExpenceCell.swift in Sources */,
 				575A2F8F23FC354100E47A7E /* AppDelegate.swift in Sources */,
 				FBC8DB99265E48CE0014DE11 /* CatogoryDetailViewController.swift in Sources */,
 				FBA4EF8D265E6C9600035048 /* EventHelper.swift in Sources */,
+				FB4198E426605897002D9537 /* Budget+CoreDataClass.swift in Sources */,
 				FB657AB2265E25FB004A42FC /* AddCategoryViewController.swift in Sources */,
+				FB1BC85926602981006EF1D6 /* Notification.swift in Sources */,
 				575A2F9823FC354100E47A7E /* DetailViewController.swift in Sources */,
 				FBA4EF86265E5E3A00035048 /* AddExpenceViewController.swift in Sources */,
 				FBA4EF98265E7CAA00035048 /* CircularProgressBarView.swift in Sources */,
 				575A2F9223FC354100E47A7E /* masterDet.xcdatamodeld in Sources */,
+				FB3BA71E265FBB2C002A0B28 /* CustomProgressView.swift in Sources */,
 				575A2F9423FC354100E47A7E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

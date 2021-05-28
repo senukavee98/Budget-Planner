@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum pickedColor: Int {
     case blue, pink, purple, green, orange
@@ -13,10 +14,19 @@ enum pickedColor: Int {
 
 class AddCategoryViewController: UIViewController {
     var selectedColor = "FFFFFF"
+    var boarderColor = "b0bec5"
+    var isEditingData: Bool = false
     @IBOutlet weak var textFieldBudgetAmount: UITextField!
     @IBOutlet weak var textViewNotes: UITextView!
     @IBOutlet weak var textFireldCategoryName: UITextField!
     
+    var editingCategory: Budget? {
+        didSet {
+            // Update the view.
+            isEditingData = true
+            configureView()
+        }
+    }
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -30,17 +40,22 @@ class AddCategoryViewController: UIViewController {
         switch pickedColor(rawValue: sender.tag) {
         case .blue:
             selectedColor = "B2E6F2"
+            boarderColor = "5ddef4"
         case .pink:
             selectedColor = "E3C5D3"
-            print("PINK")
+            boarderColor = "ffa4a2"
         case .purple:
             selectedColor = "B2C5F2"
+            boarderColor = "ba68c8"
         case .green:
             selectedColor = "E3EFD3"
+            boarderColor = "81c784"
         case .orange:
             selectedColor = "F7C9A3"
+            boarderColor = "ff8a65"
         case .none:
-            print("NOTHING")
+            selectedColor = "bcaaa4"
+            boarderColor = "90a4ae"
         }
     }
     
@@ -52,7 +67,7 @@ class AddCategoryViewController: UIViewController {
             newBudget.amount = Double(self.textFieldBudgetAmount.text!) ?? 0.0
             newBudget.notes = self.textViewNotes.text
             newBudget.color = self.selectedColor
-            
+            newBudget.boarderColor = self.boarderColor
             //save
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
         } else {
@@ -60,7 +75,47 @@ class AddCategoryViewController: UIViewController {
         }
         
         
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Budget", in: managedContext)!
+        
+        var category = NSManagedObject()
+        
+        if isEditingData {
+            category = (editingCategory as? Budget)!
+        } else {
+            category = NSManagedObject(entity: entity, insertInto: managedContext)
+        }
+        
+        
     }
+
+
+
+    func configureView() {
+        if isEditingData {
+            self.navigationItem.title = "Edit Project"
+            self.navigationItem.rightBarButtonItem?.title = "Edit"
+        }
+        
+        
+        if let category = editingCategory {
+            if let categoryName = textFireldCategoryName {
+                categoryName.text = category.category_name
+            }
+            if let textView = textViewNotes {
+                textView.text = category.notes
+            }
+            if let amount = textFieldBudgetAmount {
+                amount.text = "\(category.amount)"
+            }
+        }
+    }
+
     /*
     // MARK: - Navigation
 

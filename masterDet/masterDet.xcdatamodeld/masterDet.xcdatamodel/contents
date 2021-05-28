@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H524" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Budget" representedClassName="Budget" codeGenerationType="class">
+    <entity name="Budget" representedClassName=".Budget" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="boarderColor" optional="YES" attributeType="String"/>
         <attribute name="category_name" optional="YES" attributeType="String"/>
         <attribute name="color" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <relationship name="expences" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expence" inverseName="budgetCatoegory" inverseEntity="Expence"/>
-        <userInfo/>
     </entity>
-    <entity name="Expence" representedClassName="Expence" syncable="YES" codeGenerationType="class">
+    <entity name="Expence" representedClassName=".Expence" syncable="YES">
         <attribute name="due_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="expence_amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="expence_name" optional="YES" attributeType="String"/>
@@ -18,7 +18,7 @@
         <relationship name="budgetCatoegory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Budget" inverseName="expences" inverseEntity="Budget"/>
     </entity>
     <elements>
-        <element name="Budget" positionX="309" positionY="90" width="128" height="118"/>
+        <element name="Budget" positionX="309" positionY="90" width="128" height="133"/>
         <element name="Expence" positionX="632" positionY="126" width="128" height="148"/>
     </elements>
 </model>
