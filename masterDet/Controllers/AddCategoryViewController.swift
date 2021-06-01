@@ -24,7 +24,7 @@ class AddCategoryViewController: UIViewController {
         didSet {
             // Update the view.
             isEditingData = true
-            configureView()
+//            configureView()
         }
     }
     
@@ -32,6 +32,12 @@ class AddCategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isEditingData {
+            textFireldCategoryName.text = editingCategory?.category_name
+            textViewNotes.text = editingCategory?.notes
+            textFieldBudgetAmount.text = String(editingCategory!.amount)
+        }
+
 
         // Do any additional setup after loading the view.
     }
@@ -60,38 +66,44 @@ class AddCategoryViewController: UIViewController {
     }
     
     @IBAction func handleSave(_ sender: UIButton) {
-    let newBudget = Budget(context: context)
-    
-        if self.textFireldCategoryName.text != "" {
-            newBudget.category_name = self.textFireldCategoryName.text
-            newBudget.amount = Double(self.textFieldBudgetAmount.text!) ?? 0.0
-            newBudget.notes = self.textViewNotes.text
-            newBudget.color = self.selectedColor
-            newBudget.boarderColor = self.boarderColor
-            //save
+        let entity = NSEntityDescription.entity(forEntityName: "Budget", in: context)!
+        var category = NSManagedObject()
+
+        if isEditingData {
+            category = (editingCategory! as Budget)
+            category.setValue(self.textFireldCategoryName.text, forKey: "category_name")
+            category.setValue(Double(self.textFieldBudgetAmount.text!) ?? 0.0, forKey: "amount")
+            category.setValue(self.textViewNotes.text, forKey: "notes")
+            category.setValue(self.selectedColor, forKey: "color")
+            category.setValue(self.boarderColor, forKey: "boarderColor")
+
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
         } else {
-            //inser an alert if catogoary name not entered
+            
+            if self.textFieldBudgetAmount.text!.isNumeric {
+                if self.textFireldCategoryName.text != "" {
+    //                let newBudget = Budget(context: context)
+                    category = NSManagedObject(entity: entity, insertInto: context)
+                    category.setValue(self.textFireldCategoryName.text, forKey: "category_name")
+                    category.setValue(Double(self.textFieldBudgetAmount.text!) ?? 0.0, forKey: "amount")
+                    category.setValue(self.textViewNotes.text, forKey: "notes")
+                    category.setValue(self.selectedColor, forKey: "color")
+                    category.setValue(self.boarderColor, forKey: "boarderColor")
+        //            //save
+                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                } else {
+                    //inser an alert if catogoary name not entered
+                    let alert = UIAlertController(title: "Warning !", message: "Please Enter a Category before saving", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            } else {
+                let alert = UIAlertController(title: "Warning !", message: "Please Enter a valid input for Expense amount", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
-        
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Budget", in: managedContext)!
-        
-        var category = NSManagedObject()
-        
-        if isEditingData {
-            category = (editingCategory as? Budget)!
-        } else {
-            category = NSManagedObject(entity: entity, insertInto: managedContext)
-        }
-        
-        
+        dismiss(animated: true, completion: nil)
     }
 
 
@@ -127,3 +139,4 @@ class AddCategoryViewController: UIViewController {
     */
 
 }
+

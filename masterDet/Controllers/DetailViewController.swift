@@ -26,6 +26,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let pieChart = PieChartView()
     let emptyPieChart = PieChartView()
     var categoryDetailVC = CatogoryDetailViewController()
+    var editViewController: AddExpenceViewController? = nil
     var total_expence_value = 0.0
     {
         didSet{
@@ -52,7 +53,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 1
         }
     }
-    
+    var otherExpencetotal = 0.0
     let expenceObj : NSMutableDictionary = NSMutableDictionary()
     var jsonData = NSData()
     var expenceDataArray: [Expence] = [] {
@@ -61,9 +62,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             for (index, expence) in expenceDataArray.enumerated() {
                 if index < 4 {
-                pieChart.segments[index].name = expence.expence_name!
-                pieChart.segments[index].value = CGFloat(expence.expence_amount)
-            }
+                    otherExpencetotal = 0.0
+                    pieChart.segments[index].name = expence.expence_name!
+                    pieChart.segments[index].value = CGFloat(expence.expence_amount)
+                } else {
+                    otherExpencetotal = otherExpencetotal + expence.expence_amount;
+                    pieChart.segments[4].name = "Other"
+                    pieChart.segments[4].value = CGFloat(otherExpencetotal)
+                }
          }
             pieChart.segmentLabelFont = .systemFont(ofSize: 15)
             
@@ -75,11 +81,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenceCell", for: indexPath) as! ExpenceCell
-        
         if (self.budget != nil) {
             
             let fetchResultdObject: Expence = (self.fetchedResultsController.fetchedObjects?[indexPath.row])!
-            
+
             let title = fetchResultdObject.expence_name
             cell.labelExpenceName!.text = title!
             
@@ -107,10 +112,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         }
         
-        
-        
-//         let budget = fetchedResultsController.object(at: indexPath)
-//         configureCell(cell, withBudget: budget)
          return cell
     }
 
@@ -143,23 +144,24 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
         
         pieChart.segments = [
-            LabelledSegment(color: color.hexStringToUIColor(hex: "ef9a9a"), name: "", value: 0),
             LabelledSegment(color: color.hexStringToUIColor(hex: "90caf9"), name: "", value: 0),
+            LabelledSegment(color: color.hexStringToUIColor(hex: "ef9a9a"), name: "", value: 0),
             LabelledSegment(color: color.hexStringToUIColor(hex: "aed581"), name: "", value: 0),
-            LabelledSegment(color: color.hexStringToUIColor(hex: "ffd54f"), name: "", value: 0)
+            LabelledSegment(color: color.hexStringToUIColor(hex: "ffd54f"), name: "", value: 0),
+            LabelledSegment(color: color.hexStringToUIColor(hex: "b39ddb"), name: "", value: 0),
         ]
         emptyPieChart.segments = [
             LabelledSegment(color: .red, name: "No Expense", value: 1.0)
         ]
-        if expenceDataArray == [] {
-            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            emptyPieChart.segments[0].name = "nnn"
-            emptyPieChart.segments[0].value = 2.0
-            
-            emptyPieChart.segmentLabelFont = .systemFont(ofSize: 15)
-            
-            view.addSubview(emptyPieChart)
-        }
+        
+        pieChart.segments[0].color = color.hexStringToUIColor(hex: "90caf9")
+        pieChart.segments[0].name = "No Expense"
+        pieChart.segments[0].value = 1.0
+//
+        pieChart.segmentLabelFont = .systemFont(ofSize: 15)
+
+        view.addSubview(pieChart)
+//
         
 //        categoryDetailVC.spentAmount = 20.1
         // Do any additional setup after loading the view.
@@ -194,7 +196,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         //intantiate the results controller""
         let aFetchedResultsController = NSFetchedResultsController<Expence> (
-            fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: #keyPath(Expence.expence_name), cacheName: nil
+            fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil
         )
         
         //set delegate
@@ -252,6 +254,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let destVC = segue.destination as! AddExpenceViewController
                     destVC.budget = budget
                 }
+                
+            case "editCategory":
+                    if let indexPath = tableView.indexPathForSelectedRow {
+                        let object = fetchedResultsController.object(at: indexPath)
+                        let controller = segue.destination as! AddExpenceViewController
+                        controller.editingExpense = object as Expence
+                        editViewController = controller
+                        
+                    }
+                
+
                 
             default:
                 break

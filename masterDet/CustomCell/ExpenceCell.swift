@@ -27,7 +27,7 @@ class ExpenceCell: UITableViewCell {
         super.awakeFromNib()
 //        progressBar.progress = 0.2
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 5)
-        progressBar.tintColor = .black
+        progressBar.tintColor = ColorConverter().hexStringToUIColor(hex: "E8E4E3")
         
         // Initialization code
     }

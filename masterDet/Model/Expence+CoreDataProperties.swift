@@ -2,8 +2,7 @@
 //  Expence+CoreDataProperties.swift
 //  masterDet
 //
-//  Created by user192220 on 5/27/21.
-//  Copyright © 2021 Philip Trwoga. All rights reserved.
+//  Created by user192220 on 5/17/25.
 //
 //
 

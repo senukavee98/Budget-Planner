@@ -85,25 +85,6 @@ class CatogoryDetailViewController: UIViewController {
         view.addSubview(pieChart)
     }
     
-    func categoryDetailValueChange(spentValue: Double, reminingValue: Double) {
-        self.spentAmount = spentValue
-        self.remainingAmount = reminingValue
-//
-//        for key in expence_data {
-//            print(key[0])
-//        }
-//
-//        if self.categoryName != "" {
-//            spentAmount = spentValue
-//            remainingAmount = reminingValue
-//            print(spentValue, reminingValue, "*****************************************")
-//}
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print(self.expence_data_array, "/////////////////////////////////////////")
-//        labelSpent.text = defaults.object(forKey: "spent_amount") as? String
-            }
 
     /*
     // MARK: - Navigation

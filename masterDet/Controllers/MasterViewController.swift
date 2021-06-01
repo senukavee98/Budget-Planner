@@ -12,7 +12,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-
+    var editViewController: AddCategoryViewController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,12 +91,15 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "editCategory" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! AddCategoryViewController
+                let controller = segue.destination as! AddCategoryViewController
                 controller.editingCategory = object as Budget
+                editViewController = controller
+                
             }
         }
 
     }
+    
 
     // MARK: - Table View
 

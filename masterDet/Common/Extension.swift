@@ -2,8 +2,7 @@
 //  Extension.swift
 //  masterDet
 //
-//  Created by user192220 on 5/27/21.
-//  Copyright © 2021 Philip Trwoga. All rights reserved.
+//  Created by user192220 on 5/17/27
 //
 
 import Foundation
@@ -14,3 +13,11 @@ extension String {
     }
 }
 
+extension String
+{
+    var isNumeric: Bool
+    {
+        let range = self.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted)
+        return (range == nil)
+    }
+}
